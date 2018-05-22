@@ -1,4 +1,4 @@
-package by.pinc.rx.observablefield;
+package by.pinc.rx.observablefield.example;
 
 import android.arch.lifecycle.ViewModel;
 import android.databinding.ObservableField;

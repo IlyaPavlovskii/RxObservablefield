@@ -1,4 +1,4 @@
-package by.pinc.rx.observablefield;
+package by.pinc.rx.observablefield.example;
 
 import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 
-import by.pinc.rx.observablefield.databinding.ActivityMainBinding;
+import by.pinc.rx.observablefield.example.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
 

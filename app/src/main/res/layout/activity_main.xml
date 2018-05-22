@@ -5,7 +5,7 @@
 
         <variable
             name="model"
-            type="by.pinc.rx.observablefield.MainViewModel" />
+            type="by.pinc.rx.observablefield.example.MainViewModel" />
     </data>
 
     <LinearLayout
@@ -22,13 +22,14 @@
 
             <Button
                 style="@style/WrapStyle"
-                android:onClick="@{() -> model.integerIncrement()}"
-                android:text="@string/increment" />
+                android:onClick="@{() -> model.integerDecrement()}"
+                android:text="@string/decrement" />
 
             <Button
                 style="@style/WrapStyle"
-                android:onClick="@{() -> model.integerDecrement()}"
-                android:text="@string/decrement" />
+                android:onClick="@{() -> model.integerIncrement()}"
+                android:text="@string/increment" />
+
         </LinearLayout>
 
         <SeekBar
@@ -45,13 +46,15 @@
 
             <Button
                 style="@style/WrapStyle"
-                android:onClick="@{() -> model.floatIncrement()}"
-                android:text="@string/increment" />
+                android:onClick="@{() -> model.floatDecrement()}"
+                android:text="@string/decrement" />
 
             <Button
                 style="@style/WrapStyle"
-                android:onClick="@{() -> model.floatDecrement()}"
-                android:text="@string/decrement" />
+                android:onClick="@{() -> model.floatIncrement()}"
+                android:text="@string/increment" />
+
+
         </LinearLayout>
 
         <LinearLayout style="@style/HorizontalLinearLayout">
@@ -60,22 +63,23 @@
                 style="@style/MatchStyle"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:text="@={model.text}"/>
+                android:text="@={model.text}" />
 
             <TextView
                 style="@style/MatchStyle"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:text="@{model.text}"/>
+                android:text="@{model.text}" />
 
         </LinearLayout>
 
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <TextView
                 style="@style/MatchStyle"
-                android:text="@{model.logger}"/>
+                android:text="@{model.logger}" />
         </ScrollView>
 
     </LinearLayout>

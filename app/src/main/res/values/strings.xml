@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">RxObservableField</string>
+    <string name="integer_counter">Integer counter: %1$d</string>
+    <string name="float_counter">Float counter: %1$.1f</string>
+    <string name="increment">INC+</string>
+    <string name="decrement">DEC-</string>
+</resources>

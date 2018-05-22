@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="model"
+            type="by.pinc.rx.observablefield.MainViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <LinearLayout style="@style/HorizontalLinearLayout">
+
+            <TextView
+                style="@style/WrapStyle"
+                android:text="@{@string/integer_counter(model.intCounter)}" />
+
+            <Button
+                style="@style/WrapStyle"
+                android:onClick="@{() -> model.integerIncrement()}"
+                android:text="@string/increment" />
+
+            <Button
+                style="@style/WrapStyle"
+                android:onClick="@{() -> model.integerDecrement()}"
+                android:text="@string/decrement" />
+        </LinearLayout>
+
+        <SeekBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="100"
+            android:progress="@={model.intCounter}" />
+
+        <LinearLayout style="@style/HorizontalLinearLayout">
+
+            <TextView
+                style="@style/WrapStyle"
+                android:text="@{@string/float_counter(model.floatCounter)}" />
+
+            <Button
+                style="@style/WrapStyle"
+                android:onClick="@{() -> model.floatIncrement()}"
+                android:text="@string/increment" />
+
+            <Button
+                style="@style/WrapStyle"
+                android:onClick="@{() -> model.floatDecrement()}"
+                android:text="@string/decrement" />
+        </LinearLayout>
+
+        <LinearLayout style="@style/HorizontalLinearLayout">
+
+            <EditText
+                style="@style/MatchStyle"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="@={model.text}"/>
+
+            <TextView
+                style="@style/MatchStyle"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="@{model.text}"/>
+
+        </LinearLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                style="@style/MatchStyle"
+                android:text="@{model.logger}"/>
+        </ScrollView>
+
+    </LinearLayout>
+</layout>

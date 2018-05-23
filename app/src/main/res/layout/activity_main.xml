@@ -54,7 +54,6 @@
                 android:onClick="@{() -> model.floatIncrement()}"
                 android:text="@string/increment" />
 
-
         </LinearLayout>
 
         <LinearLayout style="@style/HorizontalLinearLayout">

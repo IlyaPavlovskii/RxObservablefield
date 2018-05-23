@@ -42,11 +42,11 @@ public class MainViewModel extends ViewModel {
     }
 
     public Observable<String> allChanges() {
-        Observable<String> intObs = RxObservableUtils.convert(intCounter)
+        Observable<String> intObs = RxObservableUtils.asObservable(intCounter)
                 .map(val -> "Int: " + val);
-        Observable<String> floatObs = RxObservableUtils.convert(floatCounter)
+        Observable<String> floatObs = RxObservableUtils.asObservable(floatCounter)
                 .map(val -> "Float: " + val);
-        Observable<String> textObs = RxObservableUtils.convert(text)
+        Observable<String> textObs = RxObservableUtils.asObservable(text)
                 .map(val -> "Text: " + val);
 
         return Observable.mergeArray(intObs, floatObs, textObs)

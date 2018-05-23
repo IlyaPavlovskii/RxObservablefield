@@ -5,6 +5,9 @@ import android.databinding.ObservableField;
 import android.databinding.ObservableFloat;
 import android.databinding.ObservableInt;
 
+import by.pinc.rx.observablefield.RxObservableUtils;
+import io.reactivex.Observable;
+
 /**
  * Create with Android Studio<br>
  * Created by Pavlovskii Ilya<br>
@@ -36,6 +39,18 @@ public class MainViewModel extends ViewModel {
 
     public void floatDecrement() {
         this.floatCounter.set(this.floatCounter.get() - 0.1f);
+    }
+
+    public Observable<String> allChanges() {
+        Observable<String> intObs = RxObservableUtils.convert(intCounter)
+                .map(val -> "Int: " + val);
+        Observable<String> floatObs = RxObservableUtils.convert(floatCounter)
+                .map(val -> "Float: " + val);
+        Observable<String> textObs = RxObservableUtils.convert(text)
+                .map(val -> "Text: " + val);
+
+        return Observable.mergeArray(intObs, floatObs, textObs)
+                .doOnNext(val -> this.logger.set(val + "\n" + this.logger.get()));
     }
 
 }

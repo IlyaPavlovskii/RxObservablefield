@@ -20,6 +20,9 @@ ext {
 
     versionCode = 1
     versionName = '0.0.1'
+
+    rxJavaVersion = '2.1.13'
+    rxAndroidVersion = '2.0.2'
 }
 
 allprojects {

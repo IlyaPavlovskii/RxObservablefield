@@ -8,22 +8,41 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 
 import by.pinc.rx.observablefield.example.databinding.ActivityMainBinding;
+import io.reactivex.disposables.CompositeDisposable;
+import timber.log.Timber;
 
 public class MainActivity extends AppCompatActivity {
 
     @NonNull
     private final ViewModelProvider.Factory mViewModelFactory = new ViewModelProviderFactory();
     @NonNull
-    private ActivityMainBinding mBinding;
-    @NonNull
     private MainViewModel mViewModel;
+
+    @NonNull
+    private final CompositeDisposable mCompositeDisposable = new CompositeDisposable();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mViewModel = getViewModel();
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-        mBinding.setModel(mViewModel);
+        ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        binding.setModel(mViewModel);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mCompositeDisposable.add(mViewModel
+                .allChanges()
+                .subscribe(
+                        log -> Timber.d("log: %s", log),
+                        Timber::w));
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mCompositeDisposable.clear();
     }
 
     @NonNull

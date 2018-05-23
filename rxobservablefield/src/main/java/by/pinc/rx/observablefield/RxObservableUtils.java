@@ -130,7 +130,12 @@ public class RxObservableUtils {
                 field.addOnPropertyChangedCallback(new android.databinding.Observable.OnPropertyChangedCallback() {
                     @Override
                     public void onPropertyChanged(android.databinding.Observable sender, int propertyId) {
-                        emitter.onNext(getter.get());
+                        T value = getter.get();
+                        if (value != null) {
+                            emitter.onNext(getter.get());
+                        } else {
+                            emitter.onError(new NullPointerException());
+                        }
                     }
                 });
             }

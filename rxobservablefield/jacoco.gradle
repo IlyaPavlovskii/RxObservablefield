@@ -27,19 +27,8 @@ tasks.create(name: "jacocoCoverage", type: JacocoReport, dependsOn: "testDebugUn
                        '**/BuildConfig.*',
                        '**/Manifest*.*',
 
-                       // Dagger 2
-                       '**/*_MembersInjector.class',
-                       '**/Dagger*Component.class', // covers component implementations
-                       '**/Dagger*Component$Builder.class', // covers component builders
-                       '**/*$InjectAdapter.class',
-                       '**/*$ModuleAdapter.class',
-                       '**/Dao*.class',
-                       '**/*$ViewInjector*.class',
-
-                       "com/raizlabs/android/dbflow/config/**/*",
                        "android/databinding/**/*",
                        "android/support/v4/**/*",
-                       "by/pinc/rx/observablefield/**/*",
                        "com/android/databinding/library/baseAdapters/**/*"
             ]
     )

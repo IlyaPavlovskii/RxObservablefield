@@ -8,8 +8,45 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.1.2'
+        classpath "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.6"
     }
 }
+
+apply plugin: "org.sonarqube"
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+    }
+    sonarqube {
+        properties {
+            property "sonar.projectName", 'RxObservableField'
+            property "sonar.projectKey", "RxObservableField"
+            property "sonar.host.url", getProps("sonar.host")
+            property "sonar.login", getProps("sonar.login")
+            property "sonar.projectVersion", rootProject.versionName
+            property "sonar.inclusions", "**/by/pinc/rx/observablefield/**"
+            property "sonar.coverage.inclusions", "**/by/pinc/rx/observablefield/**"
+        }
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+def getProps(String propName) {
+    def propsFile = rootProject.file('local.properties')
+    if (propsFile.exists()) {
+        def props = new Properties()
+        props.load(new FileInputStream(propsFile))
+        return props[propName]
+    } else {
+        return ""
+    }
+}
+
 
 ext {
     compileSdkVersion = 27
@@ -23,15 +60,4 @@ ext {
 
     rxJavaVersion = '2.1.13'
     rxAndroidVersion = '2.0.2'
-}
-
-allprojects {
-    repositories {
-        google()
-        jcenter()
-    }
-}
-
-task clean(type: Delete) {
-    delete rootProject.buildDir
 }

@@ -1,15 +1,40 @@
 apply plugin: 'com.android.library'
+apply from: "jacoco.gradle"
+
+sonarqube {
+    properties {
+        property "sonar.sources", "src/main"
+        property "sonar.tests", "src/test"
+        property "sonar.test.inclusions", "**/*Test*/**"
+        property "sonar.java.binaries", "build/intermediates/classes/demo/debug"
+        property "sonar.jacoco.reportPaths", "build/jacoco/testDebugUnitTest.exec"
+
+        property "sonar.test.inclusions", "**/*Test*/**"
+        property "sonar.language", "java"
+        property "sonar.dynamicAnalysis", "reuseReports"
+        property "sonar.java.binaries", "build/intermediates/classes/debug"
+        property "sonar.java.coveragePlugin", "jacoco"
+        property "sonar.jacoco.reportPaths", "build/jacoco/testDebugUnitTest.exec"
+        property "sonar.exclusions", "**/*Test*/**," +
+                "**/res/**," +
+                "**/App*.*," +
+                "**/Constants*.*"
+        property "sonar.test.exclusions", "**/res/**," +
+                "**/res/**"
+                "**/App*.*," +
+                "**/Constants*.*"
+    }
+}
 
 android {
-    compileSdkVersion 27
-
-
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
-        minSdkVersion 16
-        targetSdkVersion 27
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode rootProject.ext.versionCode
+        versionName rootProject.ext.versionName
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -25,7 +50,17 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-
+    sourceSets {
+        main {
+            java.srcDirs = ['src/main/java']
+            resources.srcDirs = ['src/main/res']
+        }
+        test {
+            java.srcDirs = ['src/test/java']
+            assets.srcDir file('src/test/assets')
+            resources.srcDirs += ['src/main/res', 'src/test/resources']
+        }
+    }
 }
 
 dependencies {
@@ -36,6 +71,5 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-
 
 }

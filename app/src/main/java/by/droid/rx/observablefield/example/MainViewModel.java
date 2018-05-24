@@ -1,11 +1,11 @@
-package by.pinc.rx.observablefield.example;
+package by.droid.rx.observablefield.example;
 
 import android.arch.lifecycle.ViewModel;
 import android.databinding.ObservableField;
 import android.databinding.ObservableFloat;
 import android.databinding.ObservableInt;
 
-import by.pinc.rx.observablefield.RxObservableUtils;
+import by.droid.rx.observablefield.RxObservableUtils;
 import io.reactivex.Observable;
 
 /**

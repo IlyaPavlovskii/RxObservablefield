@@ -26,8 +26,8 @@ allprojects {
             property "sonar.host.url", getProps("sonar.host")
             property "sonar.login", getProps("sonar.login")
             property "sonar.projectVersion", rootProject.versionName
-            property "sonar.inclusions", "**/by/pinc/rx/observablefield/**"
-            property "sonar.coverage.inclusions", "**/by/pinc/rx/observablefield/**"
+            property "sonar.inclusions", "**/by/droid/rx/observablefield/**"
+            property "sonar.coverage.inclusions", "**/by/droid/rx/observablefield/**"
         }
     }
 }

@@ -1,4 +1,4 @@
-package by.pinc.rx.observablefield;
+package by.droid.rx.observablefield;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("by.pinc.rx.observablefield", appContext.getPackageName());
+        assertEquals("by.droid.rx.observablefield.test", appContext.getPackageName());
     }
 }

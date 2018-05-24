@@ -1,4 +1,4 @@
-package by.pinc.rx.observablefield;
+package by.droid.rx.observablefield;
 
 /**
  * Create with Android Studio<br>

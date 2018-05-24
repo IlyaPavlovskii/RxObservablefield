@@ -1,4 +1,4 @@
-package by.pinc.rx.observablefield;
+package by.droid.rx.observablefield;
 
 import android.databinding.BaseObservable;
 import android.databinding.ObservableBoolean;

@@ -1,4 +1,4 @@
-package by.pinc.rx.observablefield.example;
+package by.droid.rx.observablefield.example;
 
 import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 
-import by.pinc.rx.observablefield.example.databinding.ActivityMainBinding;
+import by.droid.rx.observablefield.example.databinding.ActivityMainBinding;
 import io.reactivex.disposables.CompositeDisposable;
 import timber.log.Timber;
 

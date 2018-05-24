@@ -5,7 +5,7 @@
 
         <variable
             name="model"
-            type="by.pinc.rx.observablefield.example.MainViewModel" />
+            type="by.droid.rx.observablefield.example.MainViewModel" />
     </data>
 
     <LinearLayout

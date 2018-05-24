@@ -26,10 +26,12 @@ tasks.create(name: "jacocoCoverage", type: JacocoReport, dependsOn: "testDebugUn
                        '**/*$ViewBinder*.*',
                        '**/BuildConfig.*',
                        '**/Manifest*.*',
+                       '**/BR*.*',
 
                        "android/databinding/**/*",
                        "android/support/v4/**/*",
-                       "com/android/databinding/library/baseAdapters/**/*"
+                       "com/android/databinding/library/baseAdapters/**/*",
+                       "**/databinding/**/*",
             ]
     )
 

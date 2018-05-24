@@ -24,11 +24,10 @@ public class ViewModelProviderFactory implements ViewModelProvider.Factory {
             viewModel = new MainViewModel();
         }
 
-        try {
+        if (viewModel == null) {
+            throw new IllegalArgumentException("Unknown ViewModel class.Check factory: " + modelClass.getSimpleName());
+        } else {
             return (T) viewModel;
-        } catch (NullPointerException | ClassCastException e) {
-            throw new IllegalArgumentException("Unknown ViewModel class. " +
-                    "Check factory : " + modelClass.getSimpleName());
         }
     }
 }

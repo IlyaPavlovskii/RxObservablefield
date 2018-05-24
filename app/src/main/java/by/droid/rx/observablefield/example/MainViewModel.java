@@ -45,7 +45,7 @@ public class MainViewModel extends ViewModel {
         Observable<String> intObs = RxObservableUtils.asObservable(intCounter)
                 .map(val -> "Int: " + val);
         Observable<String> floatObs = RxObservableUtils.asObservable(floatCounter)
-                .map(val -> "Float: " + val);
+                .map(val -> String.format("Float: %.2f", val));
         Observable<String> textObs = RxObservableUtils.asObservable(text)
                 .map(val -> "Text: " + val);
 

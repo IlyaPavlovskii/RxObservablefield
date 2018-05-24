@@ -16,13 +16,9 @@ sonarqube {
         property "sonar.java.coveragePlugin", "jacoco"
         property "sonar.jacoco.reportPaths", "build/jacoco/testDebugUnitTest.exec"
         property "sonar.exclusions", "**/*Test*/**," +
-                "**/res/**," +
-                "**/App*.*," +
-                "**/Constants*.*"
+                "**/res/**,"
         property "sonar.test.exclusions", "**/res/**," +
                 "**/res/**"
-                "**/App*.*," +
-                "**/Constants*.*"
     }
 }
 

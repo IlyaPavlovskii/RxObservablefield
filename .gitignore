@@ -144,3 +144,4 @@ fabric.properties
 
 /.idea/
 /todolist.md
+/codecov.sh

@@ -1,6 +1,7 @@
 # RxObservableField
 [![](https://www.jitpack.io/v/IlyaPavlovskii/RxObservablefield.svg)](https://www.jitpack.io/#IlyaPavlovskii/RxObservablefield)
 [![license](https://img.shields.io/badge/license-apache-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![codecov.io](https://codecov.io/github/IlyaPavlovskii/RxObservablefield/coverage.svg?branch=master)](https://codecov.io/github/IlyaPavlovskii/RxObservablefield?branch=master)
 
 Android library for converting BaseObservable to RxJava Observable
 
@@ -17,7 +18,7 @@ allprojects {
 * Application level build.gradle
 ```
 dependencies {
-    implementation 'com.github.IlyaPavlovskii:RxObservablefield:-SNAPSHOT'
+    implementation 'com.github.IlyaPavlovskii:RxObservablefield:v0.0.2'
 }
 ```
 

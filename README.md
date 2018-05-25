@@ -1,6 +1,6 @@
 # RxObservableField
 [![](https://www.jitpack.io/v/IlyaPavlovskii/RxObservablefield.svg)](https://www.jitpack.io/#IlyaPavlovskii/RxObservablefield)
-[![license](https://img.shields.io/badge/license-apache-blue.svg)]((https://opensource.org/licenses/Apache-2.0))
+[![license](https://img.shields.io/badge/license-apache-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 Android library for converting BaseObservable to RxJava Observable
 
@@ -8,11 +8,11 @@ Android library for converting BaseObservable to RxJava Observable
 * Project level build.gradle
 ```
 allprojects {
-		repositories {
-			...
-			maven { url 'https://www.jitpack.io' }
-		}
-	}
+    repositories {
+    ...
+        maven { url 'https://www.jitpack.io' }
+    }
+}
 ```
 * Application level build.gradle
 ```

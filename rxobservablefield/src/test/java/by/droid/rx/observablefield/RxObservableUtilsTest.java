@@ -14,7 +14,12 @@ import android.graphics.Rect;
 
 import org.junit.Test;
 
+import io.reactivex.Observable;
+import io.reactivex.ObservableSource;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Function;
 import io.reactivex.observers.TestObserver;
+import io.reactivex.subjects.PublishSubject;
 
 /**
  * Create with Android Studio<br>
@@ -46,6 +51,19 @@ public class RxObservableUtilsTest {
                 .test();
         field.set(null);
         testObserver.assertError(NullPointerException.class);
+    }
+
+    @Test
+    public void testObservableField_removePropertyCallback1() {
+        final ObservableField<String> field = new ObservableField<>("default value");
+        TestObserver<String> testObserver = RxObservableUtils.asObservable(field)
+                .test();
+        field.set(null);
+
+        testObserver.assertError(NullPointerException.class);
+
+        field.set("new_value");
+        testObserver.assertNoValues();
     }
 
     @Test

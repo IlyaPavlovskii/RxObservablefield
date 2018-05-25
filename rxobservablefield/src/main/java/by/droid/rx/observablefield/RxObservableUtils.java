@@ -17,6 +17,8 @@ import android.support.annotation.NonNull;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.functions.Action;
+import io.reactivex.functions.Consumer;
 
 /**
  * Create with Android Studio<br>
@@ -34,100 +36,126 @@ public class RxObservableUtils {
     }
 
     public static <T> Observable<T> asObservable(@NonNull final ObservableField<T> field) {
-        return Observable.create(subscriber(field, new Getter<T>() {
+        return createObservable(field, new Getter<T>() {
             @Override
             public T get() {
                 return field.get();
             }
-        }));
+        });
     }
 
     public static Observable<Integer> asObservable(@NonNull final ObservableInt field) {
-        return Observable.create(subscriber(field, new Getter<Integer>() {
+        return createObservable(field, new Getter<Integer>() {
             @Override
             public Integer get() {
                 return field.get();
             }
-        }));
+        });
     }
 
     public static Observable<Boolean> asObservable(@NonNull final ObservableBoolean field) {
-        return Observable.create(subscriber(field, new Getter<Boolean>() {
+        return createObservable(field, new Getter<Boolean>() {
             @Override
             public Boolean get() {
                 return field.get();
             }
-        }));
+        });
     }
 
     public static Observable<Byte> asObservable(@NonNull final ObservableByte field) {
-        return Observable.create(subscriber(field, new Getter<Byte>() {
+        return createObservable(field, new Getter<Byte>() {
             @Override
             public Byte get() {
                 return field.get();
             }
-        }));
+        });
     }
 
     public static Observable<Character> asObservable(@NonNull final ObservableChar field) {
-        return Observable.create(subscriber(field, new Getter<Character>() {
+        return createObservable(field, new Getter<Character>() {
             @Override
             public Character get() {
                 return field.get();
             }
-        }));
+        });
     }
 
     public static Observable<Double> asObservable(@NonNull final ObservableDouble field) {
-        return Observable.create(subscriber(field, new Getter<Double>() {
+        return createObservable(field, new Getter<Double>() {
             @Override
             public Double get() {
                 return field.get();
             }
-        }));
+        });
     }
 
     public static Observable<Float> asObservable(@NonNull final ObservableFloat field) {
-        return Observable.create(subscriber(field, new Getter<Float>() {
+        return createObservable(field, new Getter<Float>() {
             @Override
             public Float get() {
                 return field.get();
             }
-        }));
+        });
     }
 
     public static Observable<Long> asObservable(@NonNull final ObservableLong field) {
-        return Observable.create(subscriber(field, new Getter<Long>() {
+        return createObservable(field, new Getter<Long>() {
             @Override
             public Long get() {
                 return field.get();
             }
-        }));
+        });
     }
 
     public static <T extends Parcelable> Observable<T> asObservable(@NonNull final ObservableParcelable<T> field) {
-        return Observable.create(subscriber(field, new Getter<T>() {
+        return createObservable(field, new Getter<T>() {
             @Override
             public T get() {
                 return field.get();
             }
-        }));
+        });
     }
 
     public static Observable<Short> asObservable(@NonNull final ObservableShort field) {
-        return Observable.create(subscriber(field, new Getter<Short>() {
+        return createObservable(field, new Getter<Short>() {
             @Override
             public Short get() {
                 return field.get();
             }
-        }));
+        });
     }
 
-    private static <T> ObservableOnSubscribe<T> subscriber(final BaseObservable field, final Getter<T> getter) {
-        return new ObservableOnSubscribe<T>() {
+    private static <T> Observable<T> createObservable(@NonNull final BaseObservable field,
+                                                      @NonNull Getter<T> getter) {
+        return createObservable(
+                buffer(field, getter),
+                field);
+    }
+
+    private static <T> Observable<T> createObservable(@NonNull final SubscriberBuffer<T> buffer,
+                                                      @NonNull final BaseObservable field) {
+        return Observable.create(buffer.mSubscriber)
+                .doOnError(new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        field.removeOnPropertyChangedCallback(buffer.mPropertyCallback);
+                    }
+                })
+                .doOnComplete(new Action() {
+                    @Override
+                    public void run() throws Exception {
+                        field.removeOnPropertyChangedCallback(buffer.mPropertyCallback);
+                    }
+                });
+    }
+
+    private static <T> SubscriberBuffer<T> buffer(final BaseObservable field, final Getter<T> getter) {
+        final SubscriberBuffer<T> buffer = new SubscriberBuffer<>();
+        buffer.mSubscriber = new ObservableOnSubscribe<T>() {
             @Override
             public void subscribe(final ObservableEmitter<T> emitter) {
-                field.addOnPropertyChangedCallback(new android.databinding.Observable.OnPropertyChangedCallback() {
+                //emitter.onComplete();
+                buffer.mPropertyCallback = new android.databinding.Observable.OnPropertyChangedCallback() {
                     @Override
                     public void onPropertyChanged(android.databinding.Observable sender, int propertyId) {
                         T value = getter.get();
@@ -137,9 +165,20 @@ public class RxObservableUtils {
                             emitter.onError(new NullPointerException());
                         }
                     }
-                });
+                };
+                field.addOnPropertyChangedCallback(buffer.mPropertyCallback);
             }
         };
+        return buffer;
     }
+
+    private static class SubscriberBuffer<T> {
+        ObservableOnSubscribe<T> mSubscriber;
+        android.databinding.Observable.OnPropertyChangedCallback mPropertyCallback;
+
+        SubscriberBuffer() {
+        }
+    }
+
 
 }
